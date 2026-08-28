@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BrandMark from '../components/BrandMark.astro';
 import StoryCard from '../components/StoryCard.astro';
 import ContextualCTA from '../components/ContextualCTA.astro';
+
 const writing = (await getCollection('writing')).sort((a,b) => b.data.published.valueOf() - a.data.published.valueOf());
 const featured = writing.find(x => x.data.featured) || writing[0];
 const latest = writing.filter(x => x.id !== featured?.id).slice(0,3);
@@ -14,21 +15,23 @@ const storyHref = (e) => e.data.format === 'field-note' ? `/field-notes/${e.id}`
 ---
 <BaseLayout description="Real-world observations on parcel delivery, apartment operations, systems, behaviour, process and practical technology.">
   <section class="home-hero">
-    <div class="shell hero-grid">
-      <div>
-        <div class="section-kicker">BEN ON DELIVERY</div>
-        <h1>THE POINT WHERE<br/>THE SYSTEM<br/><span>MEETS REALITY.</span></h1>
-        <p>Real-world observations on parcel delivery, apartment operations, systems, behaviour, process and practical technology.</p>
-        {featured && <a class="text-link" href={storyHref(featured)}>Read the latest →</a>}
-      </div>
-      <BrandMark class="hero-mark" />
+    <div class="shell">
+      <div class="section-kicker">BEN ON DELIVERY</div>
+      <h1>THE POINT WHERE<br/>THE SYSTEM<br/><span>MEETS REALITY.</span></h1>
+      <p>Real-world observations on parcel delivery, apartment operations, systems, behaviour, process and practical technology.</p>
+      {featured && <a class="text-link" href={storyHref(featured)}>Read the latest →</a>}
     </div>
   </section>
 
   {featured && <section class="section shell featured-story">
     <div class="section-kicker">Featured</div>
     <div class="featured-grid">
-      <div class="feature-visual"><BrandMark /></div>
+      <div class:list={['feature-visual', { 'has-image': Boolean(featured.data.heroImage) }]}>
+        {featured.data.heroImage
+          ? <img src={featured.data.heroImage} alt={featured.data.heroAlt || ''} loading="eager" />
+          : <BrandMark />
+        }
+      </div>
       <div>
         <div class="eyebrow">{featured.data.series.replaceAll('-', ' ')}</div>
         <h2>{featured.data.title}</h2>
