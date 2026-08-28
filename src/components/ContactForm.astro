@@ -1,20 +1,49 @@
 ---
 const { source = Astro.url.pathname, compact = false } = Astro.props;
+const accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY;
+const redirectUrl = new URL('/thanks', Astro.site ?? Astro.url.origin).toString();
 ---
-<form class:list={['contact-form', compact && 'compact']} name="contact" method="POST" action="/thanks" data-netlify="true" data-netlify-honeypot="bot-field">
-  <input type="hidden" name="form-name" value="contact" />
+
+<form
+  class:list={['contact-form', compact && 'compact']}
+  action="https://api.web3forms.com/submit"
+  method="POST"
+>
+  <input type="hidden" name="access_key" value={accessKey} />
+  <input type="hidden" name="subject" value="New BEN ON DELIVERY contact form submission" />
+  <input type="hidden" name="redirect" value={redirectUrl} />
   <input type="hidden" name="source_page" id="source-page-field" value={source} />
   <input type="hidden" name="referrer" id="referrer-field" value="" />
-  <p class="hp-field"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-  <label>Name *<input name="name" autocomplete="name" required /></label>
-  <label>Email *<input type="email" name="email" autocomplete="email" required /></label>
-  <label>Phone <span>optional</span><input type="tel" name="phone" autocomplete="tel" /></label>
-  <label>Message *<textarea name="message" rows="6" required></textarea></label>
+
+  <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" />
+
+  <label>
+    Name *
+    <input name="name" autocomplete="name" required />
+  </label>
+
+  <label>
+    Email *
+    <input type="email" name="email" autocomplete="email" required />
+  </label>
+
+  <label>
+    Phone <span>optional</span>
+    <input type="tel" name="phone" autocomplete="tel" />
+  </label>
+
+  <label>
+    Message *
+    <textarea name="message" rows="6" required></textarea>
+  </label>
+
   <button class="button" type="submit">Send message</button>
 </form>
+
 <script>
   const referrer = document.querySelector('#referrer-field');
   if (referrer instanceof HTMLInputElement) referrer.value = document.referrer || '';
+
   const source = document.querySelector('#source-page-field');
   const from = new URLSearchParams(window.location.search).get('from');
   if (source instanceof HTMLInputElement && from) source.value = from;
