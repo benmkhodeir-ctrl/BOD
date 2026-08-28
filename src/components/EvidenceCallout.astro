@@ -1,0 +1,15 @@
+---
+const { type = 'observation', title, children } = Astro.props;
+const labels = {
+  fact: 'Documented fact',
+  observation: 'Field observation',
+  inference: 'Inference',
+  gap: 'Information gap',
+  question: 'Open question'
+};
+---
+<aside class={`evidence-callout evidence-${type}`}>
+  <div class="eyebrow">{labels[type] || type}</div>
+  {title && <strong>{title}</strong>}
+  <div><slot /></div>
+</aside>

@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StoryCard from '../components/StoryCard.astro';
+import BrandMark from '../components/BrandMark.astro';
+const entries = (await getCollection('writing', ({data}) => data.series === 'the-process-broke-here')).sort((a,b) => b.data.published.valueOf() - a.data.published.valueOf());
+---
+<BaseLayout title="The Process Broke Here" description="Finding the precise failure point in a real system or process.">
+  <section class="page-intro shell process-intro"><div><div class="section-kicker">The Process Broke Here</div><h1>The visible problem is not always where the system failed.</h1><p>This series looks for the handoff, incentive, constraint or missing information that actually changed the outcome.</p></div><BrandMark class="process-mark" /></section>
+  <section class="section shell"><div class="cards-grid">{entries.map(entry => <StoryCard entry={entry} />)}</div></section>
+</BaseLayout>

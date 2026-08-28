@@ -1,0 +1,19 @@
+---
+const { entry } = Astro.props;
+const d = entry.data;
+const href = d.format === 'field-note' ? `/field-notes/${entry.id}` : `/articles/${entry.id}`;
+const seriesLabels = {
+  'the-last-inch': 'The Last Inch',
+  'the-process-broke-here': 'The Process Broke Here',
+  'general': d.format === 'field-note' ? 'Field Note' : 'Article'
+};
+---
+<article class="story-card">
+  <div class="eyebrow">{seriesLabels[d.series]}</div>
+  <h3><a href={href}>{d.title}</a></h3>
+  <p>{d.standfirst}</p>
+  <div class="story-meta">
+    <time datetime={d.published.toISOString()}>{d.published.toLocaleDateString('en-AU')}</time>
+    {d.status === 'prototype' && <span>Prototype copy</span>}
+  </div>
+</article>

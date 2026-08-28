@@ -1,0 +1,32 @@
+---
+import BrandMark from './BrandMark.astro';
+const pathname = Astro.url.pathname;
+const nav = [
+  ['/articles', 'Articles'],
+  ['/the-last-inch', 'The Last Inch'],
+  ['/field-notes', 'Field Notes'],
+  ['/about', 'About'],
+  ['/contact', 'Contact']
+];
+---
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand-lockup" href="/" aria-label="Ben on Delivery home">
+      <BrandMark class="brand-mark" />
+      <span class="brand-name">BEN ON DELIVERY</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      {nav.map(([href, label]) => <a class:list={[pathname.startsWith(href) && 'active']} href={href}>{label}</a>)}
+    </nav>
+  </div>
+</header>
+<script>
+  const button = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.primary-nav');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('open', !open);
+  });
+</script>

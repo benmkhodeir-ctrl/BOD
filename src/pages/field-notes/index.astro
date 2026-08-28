@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StoryCard from '../../components/StoryCard.astro';
+const entries = (await getCollection('writing', ({data}) => data.format === 'field-note')).sort((a,b) => b.data.published.valueOf() - a.data.published.valueOf());
+---
+<BaseLayout title="Field Notes" description="Short BEN ON DELIVERY observations from the field.">
+  <section class="page-intro shell"><div class="section-kicker">Field Notes</div><h1>Things worth noticing.</h1><p>Short observations that deserve more permanence than a social post but do not need to be inflated into an article.</p></section>
+  <section class="section shell"><div class="cards-grid">{entries.map(entry => <StoryCard entry={entry} />)}</div></section>
+</BaseLayout>

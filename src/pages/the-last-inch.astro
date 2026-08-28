@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StoryCard from '../components/StoryCard.astro';
+const entries = (await getCollection('writing', ({data}) => data.series === 'the-last-inch')).sort((a,b) => b.data.published.valueOf() - a.data.published.valueOf());
+---
+<BaseLayout title="The Last Inch" description="The final real-world handoff between an otherwise sound system and actual behaviour or environment.">
+  <section class="page-intro shell"><div class="section-kicker">The Last Inch</div><h1>The final handoff changes everything.</h1><p>A system can make sense all the way through and still fail when it encounters actual use. The Last Inch looks at that final interaction.</p></section>
+  <section class="section shell"><div class="cards-grid">{entries.map(entry => <StoryCard entry={entry} />)}</div></section>
+</BaseLayout>

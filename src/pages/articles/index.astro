@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StoryCard from '../../components/StoryCard.astro';
+const entries = (await getCollection('writing', ({data}) => data.format === 'article')).sort((a,b) => b.data.published.valueOf() - a.data.published.valueOf());
+---
+<BaseLayout title="Articles" description="Long-form BEN ON DELIVERY articles: observations, mechanisms and practical lessons from where systems meet reality.">
+  <section class="page-intro shell"><div class="section-kicker">Articles</div><h1>Developed thinking.<br/>Built from the field.</h1><p>Posts can start the thought. Articles are where the evidence, competing explanations and useful implications get worked through.</p></section>
+  <section class="section shell"><div class="cards-grid">{entries.map(entry => <StoryCard entry={entry} />)}</div></section>
+</BaseLayout>

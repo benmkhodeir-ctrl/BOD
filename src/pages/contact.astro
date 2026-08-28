@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+const from = Astro.url.searchParams.get('from') || '/contact';
+---
+<BaseLayout title="Contact" description="Get in touch with Ben Khodeir.">
+  <section class="page-intro shell-reading"><div class="section-kicker">Get in touch</div><h1>Something worth talking about?</h1><p>Whether it’s parcel delivery, media, an introduction, a collaboration or something completely different, send me a note.</p></section>
+  <section class="contact-section shell-reading"><ContactForm source={from} /></section>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+const { pageId, pageTitle } = Astro.props;
+const websiteId = import.meta.env.PUBLIC_HYVOR_WEBSITE_ID;
+---
+<section class="comments-block" id="comments">
+  <div class="section-kicker">Join the conversation</div>
+  <h2>What have I missed?</h2>
+  <p>Use your name and email. Your email stays private and is used for reply notifications. Anonymous comments are not part of this site.</p>
+  {websiteId ? (
+    <>
+      <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+      <hyvor-talk-comments website-id={websiteId} page-id={pageId} page-title={pageTitle} colors="light"></hyvor-talk-comments>
+    </>
+  ) : (
+    <div class="comments-placeholder">
+      <strong>Comments are ready to connect.</strong>
+      <p>Add <code>PUBLIC_HYVOR_WEBSITE_ID</code> in Netlify after creating the BEN ON DELIVERY site in Hyvor Talk. Configure guest email as <strong>required</strong> and moderation for new commenters in the Hyvor console.</p>
+    </div>
+  )}
+</section>
