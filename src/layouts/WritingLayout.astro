@@ -1,5 +1,5 @@
 ---
-import ShareArticle from '../components/ShareArticle.astro';
+import ShareArticle from '../components/sharearticle.astro';
 import BaseLayout from './BaseLayout.astro';
 import ContextualCTA from '../components/ContextualCTA.astro';
 import Comments from '../components/Comments.astro';
@@ -21,7 +21,7 @@ const jsonLd = {
   author: { '@type': 'Person', name: 'Ben Khodeir' },
   publisher: { '@type': 'Organization', name: 'BEN ON DELIVERY' },
   mainEntityOfPage: new URL(canonicalPath, Astro.site || Astro.url.origin).toString()
-};
+}
 ---
 <BaseLayout title={d.title} description={d.standfirst} image={d.heroImage} type="article">
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
