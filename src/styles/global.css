@@ -30,3 +30,12 @@
     margin: 24px auto;
   }
 }
+.hero-evidence figcaption {
+  max-width: 620px;
+  margin: 10px auto 0;
+  text-align: center;
+  line-height: 1.4;
+}
+.hero-evidence {
+  margin-bottom: 65px;
+}
