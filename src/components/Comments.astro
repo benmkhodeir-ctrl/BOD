@@ -1,20 +1,30 @@
 ---
 const { pageId, pageTitle } = Astro.props;
-const websiteId = import.meta.env.PUBLIC_HYVOR_WEBSITE_ID;
+const appId = import.meta.env.PUBLIC_CUSDIS_APP_ID;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 ---
+
 <section class="comments-block" id="comments">
   <div class="section-kicker">Join the conversation</div>
   <h2>What have I missed?</h2>
-  <p>Use your name and email. Your email stays private and is used for reply notifications. Anonymous comments are not part of this site.</p>
-  {websiteId ? (
+  <p>Use your name and email. Your email stays private. Comments are moderated before publication.</p>
+
+  {appId ? (
     <>
-      <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-      <hyvor-talk-comments website-id={websiteId} page-id={pageId} page-title={pageTitle} colors="light"></hyvor-talk-comments>
+      <div
+        id="cusdis_thread"
+        data-host="https://cusdis.com"
+        data-app-id={appId}
+        data-page-id={pageId}
+        data-page-url={pageUrl}
+        data-page-title={pageTitle}
+      ></div>
+      <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     </>
   ) : (
     <div class="comments-placeholder">
       <strong>Comments are ready to connect.</strong>
-      <p>Add <code>PUBLIC_HYVOR_WEBSITE_ID</code> in Netlify after creating the BEN ON DELIVERY site in Hyvor Talk. Configure guest email as <strong>required</strong> and moderation for new commenters in the Hyvor console.</p>
+      <p>Add <code>PUBLIC_CUSDIS_APP_ID</code> to the Cloudflare Pages environment variables, then rebuild the site.</p>
     </div>
   )}
 </section>
