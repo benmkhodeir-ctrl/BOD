@@ -39,3 +39,47 @@
 .hero-evidence {
   margin-bottom: 65px;
 }
+/* Article sharing */
+
+.article-share {
+  margin: 55px 0 25px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.article-share-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+  margin-top: 12px;
+}
+
+.article-share-links a,
+.share-copy {
+  font: 700 13px Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--charcoal);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.article-share-links a:hover,
+.share-copy:hover {
+  color: var(--ochre);
+  text-decoration: none;
+}
+
+@media (max-width: 820px) {
+  .article-share {
+    margin-top: 42px;
+  }
+
+  .article-share-links {
+    gap: 18px;
+  }
+}
