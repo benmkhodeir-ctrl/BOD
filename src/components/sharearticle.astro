@@ -1,0 +1,64 @@
+---
+const { title, url, label = 'Share this article' } = Astro.props;
+
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<section class="article-share" aria-label={label}>
+  <div class="section-kicker">{label}</div>
+
+  <div class="article-share-links">
+    <a
+      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LinkedIn
+    </a>
+
+    <a
+      href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Facebook
+    </a>
+
+    <a
+      href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      X
+    </a>
+
+    <button
+      type="button"
+      class="share-copy"
+      data-share-url={url}
+    >
+      Copy link
+    </button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-share-url]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const url = button.getAttribute('data-share-url');
+
+      try {
+        await navigator.clipboard.writeText(url);
+        const original = button.textContent;
+        button.textContent = 'Copied';
+
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1800);
+      } catch {
+        window.prompt('Copy this link:', url);
+      }
+    });
+  });
+</script>
