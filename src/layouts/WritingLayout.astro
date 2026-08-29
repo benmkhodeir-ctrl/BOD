@@ -41,7 +41,13 @@ const jsonLd = {
     )}
     <div class="article-body shell-reading"><slot /></div>
   </article>
-
+<div class="shell-reading">
+  <ShareArticle
+    title={d.title}
+    url={new URL(canonicalPath, Astro.site || Astro.url.origin).toString()}
+    label={d.format === 'field-note' ? 'Share this field note' : 'Share this article'}
+  />
+</div>
   {d.contactPrompt !== 'none' && <div class="shell-reading"><ContextualCTA mode={d.contactPrompt} source={canonicalPath} /></div>}
 
   {d.discussion && <section class="social-discussion shell-reading">
