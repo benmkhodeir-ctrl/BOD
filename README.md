@@ -1,14 +1,27 @@
-# BEN ON DELIVERY — Site v1
+# BEN ON DELIVERY
 
-Netlify-ready Astro publication starter built from the agreed website brief and the current BEN ON DELIVERY brand rules.
+BEN ON DELIVERY is an Astro publication about the point where systems meet reality.
+
+## Canonical architecture
+
+`benmkhodeir-ctrl/BOD` on GitHub is the sole source of truth.
+
+Production flow:
+
+`GitHub main → Cloudflare Pages → https://benondelivery.com`
+
+Netlify is not part of the current architecture.
 
 ## Stack
 
-- Astro static output
-- Markdown content collection
-- Netlify hosting and Forms
-- Hyvor Talk comments
-- Anton + Inter loaded from Google Fonts
+- Astro static site
+- Markdown content collections
+- GitHub source control
+- Cloudflare Pages hosting and delivery
+- Web3Forms contact-form processing
+- Cusdis comments
+- Anton and Inter through Google Fonts
+- no CMS
 
 ## Local development
 
@@ -17,45 +30,42 @@ npm install
 npm run dev
 ```
 
-Build:
+Production build:
 
 ```bash
 npm run build
 ```
 
-## Netlify
+The generated site is written to `dist/`.
 
-1. Push this folder to a Git repository.
-2. Create/import the site in Netlify.
-3. Netlify should use `npm run build` and publish `dist` (also defined in `netlify.toml`).
-4. Enable **Forms > Form detection** in Netlify.
-5. Add an email notification for the `contact` form. Because the field is named `email`, Netlify can set Reply-To to the submitter.
-6. Set the production `SITE_URL` environment variable to the final canonical domain if it differs from `https://benondelivery.com`.
+## Deployment
 
-## Hyvor Talk
+1. Make the approved change in this repository.
+2. Build and verify it locally where possible.
+3. Commit the change to `main`.
+4. Cloudflare builds and deploys the new commit automatically.
+5. Verify the affected page or asset at `https://benondelivery.com`.
 
-Create a BEN ON DELIVERY website in Hyvor Talk and set Netlify environment variable:
+Do not create a separate deployment copy of the site. Do not configure Netlify.
 
-`PUBLIC_HYVOR_WEBSITE_ID=<website id>`
+## Environment variables
 
-In Hyvor Talk settings:
+Configure these in Cloudflare, never in the repository:
 
-- guest commenting: on
-- guest email: **required**
-- premoderation: new/guest commenters as preferred
-- spam protection: on
+- `SITE_URL` — optional; defaults to `https://benondelivery.com`
+- `WEB3FORMS_ACCESS_KEY` — contact-form access key
+- `PUBLIC_CUSDIS_APP_ID` — Cusdis website/application identifier
 
-Important: requiring guest email is not the same as verifying ownership of that email address. If email ownership verification becomes a hard requirement, replace/extend the comments auth model rather than pretending Hyvor guest email proves identity.
+## Content
 
-## Content model
-
-All publication content is in `src/content/writing/`.
+Publication content lives in `src/content/writing/`.
 
 Frontmatter fields:
 
 - `title`
 - `standfirst`
 - `published`
+- optional `updated`
 - `format`: `article` or `field-note`
 - `series`: `the-last-inch`, `the-process-broke-here`, or `general`
 - `tags`
@@ -65,12 +75,24 @@ Frontmatter fields:
 - optional social discussion URLs
 - `contactPrompt`: `commercial`, `general`, or `none`
 
-The four supplied pieces are prototype copy only. They exist to make the layouts visible and should not be treated as published editorial without approval.
+Only content explicitly marked and approved as published should be treated as public editorial.
 
-## Locked visual identity
+## Static and social assets
 
-The B4 mark is drawn as vector geometry in `BrandMark.astro` using the locked master path:
+Store ordinary site assets in `public/`.
+
+Store reusable social assets in `public/images/social/` using descriptive filenames. An asset committed there is served from the equivalent root URL after Cloudflare deploys it.
+
+Example:
+
+`public/images/social/example.jpg → https://benondelivery.com/images/social/example.jpg`
+
+## Visual identity
+
+The B4 mark is drawn as vector geometry in `src/components/BrandMark.astro` using the locked master path:
 
 `M 309 10 H 540 V 90 H 10 V 10 H 291`
 
 ViewBox: `550 × 100`; stroke: `18`; one interruption only.
+
+See `00 — Product & Infrastructure Source of Truth.md` for the current operational record.

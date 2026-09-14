@@ -7,7 +7,7 @@ series: the-last-inch
 tags: [apartment-delivery, last-inch, wayfinding, multi-building, parcel-delivery]
 featured: false
 status: published
-heroImage: "/field-note-right-address-wrong-place.avif"
+heroImage: "/field-note-right-address-wrong-place.jpg"
 heroAlt: "Site map of Kimberley Estate showing dozens of separate building lobbies and individual dwelling entrances within one residential development."
 heroCaption: "One street address. 42 separate lobbies, plus individual entrances to standalone dwellings."
 contactPrompt: general
