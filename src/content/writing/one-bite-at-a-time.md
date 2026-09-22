@@ -7,6 +7,9 @@ series: the-last-inch
 tags: [apartment-delivery, parcel-delivery, workflow, security, decision-making, last-inch]
 featured: false
 status: published
+heroImage: "/images/social/elephant-amazon-parcels-last-inch.jpg"
+heroAlt: "An elephant delivering Amazon parcels outside an apartment building."
+heroCaption: "The first step does not solve the whole problem. It makes the next step possible."
 contactPrompt: general
 ---
 
