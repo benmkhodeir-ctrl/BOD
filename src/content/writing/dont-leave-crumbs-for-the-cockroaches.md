@@ -1,19 +1,15 @@
 ---
-title: "Don't leave crumbs for the cockroaches"
+title: "Don’t leave crumbs for the cockroaches"
 standfirst: "Twenty years in hospitality taught me something about pest control that now shapes how I think about parcel theft: stop creating the conditions for the problem."
-published: "2026-09-25"
-format: "field-note"
-series: "The Last Inch"
-tags:
-  - parcel-delivery
-  - parcel-theft
-  - apartment-delivery
-  - process-design
-  - human-behaviour
-  - security
-  - last-inch
+published: 2026-09-24
+format: field-note
+series: the-last-inch
+tags: [apartment-delivery, parcel-delivery, parcel-theft, process-design, human-behaviour, security, last-inch]
 featured: false
-contactPrompt: "general"
+status: published
+heroImage: "/images/social/cockroach-parcel-theft-field-note.webp"
+heroAlt: "A masked cockroach carrying an Amazon parcel through a modern apartment building lobby."
+contactPrompt: general
 ---
 
 Twenty years in hospitality taught me a lot.
@@ -42,7 +38,7 @@ So you couldn't design a process that depended on everyone being deeply invested
 
 You had to make it as easy as possible to do the right thing, and as hard as possible to cut corners.
 
-If there was a gap a broom couldn't get into, that area probably wasn't getting swept.
+If there was a gap a broom couldn't get into easily, that area probably wasn't getting swept.
 
 You could tell someone to clean it.
 
