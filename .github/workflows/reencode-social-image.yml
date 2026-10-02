@@ -1,0 +1,36 @@
+name: Re-encode social image
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reencode-social-image.yml'
+permissions:
+  contents: write
+jobs:
+  reencode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Re-encode JPEG
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          src='public/images/social/parcels-stolen-inside-last-inch-social.jpg'
+          dst='public/images/social/parcels-stolen-inside-last-inch-social-clean-20261002.jpg'
+          with Image.open(src) as im:
+              im = im.convert('RGB')
+              im.save(dst, 'JPEG', quality=90, optimize=True, progressive=False)
+          with Image.open(dst) as check:
+              print(check.mode, check.size, check.info)
+          PY
+      - name: Commit clean JPEG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/social/parcels-stolen-inside-last-inch-social-clean-20261002.jpg
+          git commit -m "Re-encode social image for X and LinkedIn" || exit 0
+          git push
