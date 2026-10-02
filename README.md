@@ -81,11 +81,19 @@ Only content explicitly marked and approved as published should be treated as pu
 
 Store ordinary site assets in `public/`.
 
-Store reusable social assets in `public/images/social/` using descriptive filenames. An asset committed there is served from the equivalent root URL after Cloudflare deploys it.
+`public/images/social/` contains permanent social-related assets already used by the site or retained intentionally.
 
-Example:
+`public/images/social/buffer/` is temporary publishing staging for Buffer only.
 
-`public/images/social/example.jpg → https://benondelivery.com/images/social/example.jpg`
+Buffer workflow:
+
+1. Put the final approved social media file in `public/images/social/buffer/`.
+2. Commit to `main` and allow Cloudflare to deploy it.
+3. Verify the public `https://benondelivery.com/images/social/buffer/...` URL.
+4. Give that URL to Buffer.
+5. Once Buffer has fetched the asset and the publishing attempt is complete, delete the file from `public/images/social/buffer/`, whether the resulting post was correct or needs to be replaced.
+
+Website content must never reference `/images/social/buffer/`.
 
 ## Visual identity
 

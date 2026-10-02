@@ -1,6 +1,6 @@
 # BEN ON DELIVERY — Product & Infrastructure Source of Truth
 
-**Last verified:** 14 September 2026  
+**Last verified:** 02 October 2026  
 **Status:** live
 
 ## Product
@@ -43,7 +43,8 @@ Netlify and Hyvor Talk are retired and must not be introduced into new instructi
 - `src/layouts/` — shared page layouts
 - `src/styles/` — global styling
 - `public/` — static website assets
-- `public/images/social/` — hosted social assets
+- `public/images/social/` — permanent social-related assets already used by the site or intentionally retained
+- `public/images/social/buffer/` — temporary public staging for Buffer delivery only
 
 ## Environment variables
 
@@ -68,13 +69,21 @@ The form collects name, email, optional phone, message, source page and referrer
 5. Allow Cloudflare to deploy the commit.
 6. Verify the live route, asset, metadata and any affected interaction.
 
-## Social asset workflow
+## Buffer social asset workflow
 
-1. Place the approved asset in `public/images/social/`.
-2. Use a descriptive, stable filename.
-3. Commit it to `main`.
-4. Confirm Cloudflare has deployed it.
-5. Verify its public URL before supplying that URL to another platform.
+1. Finalise the approved social asset before publishing.
+2. Place the exact publishing file in `public/images/social/buffer/`.
+3. For carousels, use ordered filenames such as `01`, `02`, `03`.
+4. Commit to `main`.
+5. Confirm Cloudflare has deployed the commit.
+6. Verify the final public URL on `benondelivery.com`.
+7. Supply that exact public URL to Buffer.
+8. Once Buffer has fetched the asset and the publishing attempt is complete, delete the staging file from `public/images/social/buffer/`.
+9. If a post is wrong, remove the wrong staging asset as well, create the corrected asset, and repeat the workflow.
+
+A successful Buffer response proves delivery, not image quality. The publishing asset must be checked before Buffer receives it.
+
+Website content must never reference `/images/social/buffer/`.
 
 A GitHub file page is not the hosted media URL. The expected public URL mirrors the path beneath `public/`.
 
@@ -107,3 +116,5 @@ For relevant changes, verify:
 - Cusdis replaced the earlier Hyvor Talk proposal.
 - Markdown remains the content system until it becomes a demonstrated bottleneck.
 - Assets are stored directly as files; base64 reconstruction workarounds are retired.
+- Buffer receives social media through temporary files staged under `public/images/social/buffer/`.
+- The Buffer staging directory is not a social archive and must not be referenced by website content.
