@@ -7,8 +7,8 @@ series: the-last-inch
 tags: [apartment-delivery, parcel-delivery, parcel-theft, process-design, human-behaviour, security, amazon-key, last-inch]
 featured: false
 status: published
-heroImage: "/images/social/parcel-theft-process-jigsaw.jpg"
-heroAlt: "A courier carrying parcels into an apartment lobby shown as an incomplete jigsaw puzzle."
+heroImage: "/images/social/elephant-amazon-parcels-last-inch.jpg"
+heroAlt: "An elephant delivering Amazon parcels to an apartment building."
 contactPrompt: general
 ---
 
